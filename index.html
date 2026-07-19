@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>GARD AR 3D</title>
 
@@ -10,66 +10,67 @@
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
+body{
+  margin:0;
+  overflow:hidden;
 }
 
-.info {
-  position: fixed;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-family: Arial, sans-serif;
-  background: rgba(0,0,0,.5);
-  padding: 10px;
-  z-index: 999;
+.guide{
+  position:fixed;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+  color:white;
+  background:rgba(0,0,0,.55);
+  padding:12px;
+  z-index:999;
+  font-family:Arial;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<div class="info">
+<div class="guide">
 کارت GARD را مقابل دوربین بگیرید
 </div>
 
 <a-scene
-  mindar-image="imageTargetSrc: ./guard.mind;"
-  color-space="sRGB"
-  renderer="colorManagement: true, physicallyCorrectLights"
-  vr-mode-ui="enabled: false"
-  device-orientation-permission-ui="enabled: false">
+mindar-image="imageTargetSrc: ./guard.mind;"
+embedded
+color-space="sRGB"
+renderer="colorManagement:true, physicallyCorrectLights"
+vr-mode-ui="enabled:false"
+device-orientation-permission-ui="enabled:false">
 
-  <a-assets>
+<a-assets>
 
-    <a-asset-item
-      id="guardModel"
-      src="./guard3d.glb">
-    </a-asset-item>
+<a-asset-item
+id="guardModel"
+src="./guard3d.glb">
+</a-asset-item>
 
-  </a-assets>
+</a-assets>
 
-  <a-camera
-    position="0 0 0"
-    look-controls="enabled: false">
-  </a-camera>
+<a-camera
+position="0 0 0"
+look-controls="enabled:false">
+</a-camera>
 
-  <a-entity mindar-image-target="targetIndex: 0">
+<a-entity mindar-image-target="targetIndex:0">
 
-    <a-gltf-model
-      src="#guardModel"
-      position="0 0 0"
-      rotation="0 0 0"
-      scale="0.3 0.3 0.3"
-      animation="property: rotation;
-                 to: 0 360 0;
-                 loop: true;
-                 dur: 8000">
-    </a-gltf-model>
+<a-gltf-model
+src="#guardModel"
+position="0 0 0"
+rotation="0 0 0"
+scale="0.15 0.15 0.15"
+animation="property: rotation;
+           to: 0 360 0;
+           loop: true;
+           dur: 8000">
+</a-gltf-model>
 
-  </a-entity>
+</a-entity>
 
 </a-scene>
 

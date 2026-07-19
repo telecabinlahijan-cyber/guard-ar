@@ -63,13 +63,16 @@ body {
 
   <a-entity mindar-image-target="targetIndex: 0">
 
-    <a-gltf-model
-      src="#guardModel"
-      position="0 0 0"
-      rotation="0 0 0"
-     scale="0.05 0.05 0.05"
-    
-    </a-gltf-model>
+  <a-gltf-model
+  src="#guardModel"
+  position="0 0 0"
+  rotation="0 0 0"
+  scale="0.1 0.1 0.1"
+  animation="property: rotation;
+             to: 0 360 0;
+             loop: true;
+             dur: 8000">
+</a-gltf-model>
 
   </a-entity>
 

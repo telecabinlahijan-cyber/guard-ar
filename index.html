@@ -36,12 +36,17 @@ body {
 </div>
 
 <a-scene
-  mindar-image="imageTargetSrc: ./guard.mind;"
+  mindar-image="
+    imageTargetSrc: ./guard.mind;
+    filterMinCF: 0.0005;
+    filterBeta: 0.001;
+    warmupTolerance: 8;
+    missTolerance: 12;
+  "
   color-space="sRGB"
   renderer="colorManagement: true, physicallyCorrectLights"
   vr-mode-ui="enabled: false"
   device-orientation-permission-ui="enabled: false">
-
   <a-assets>
 
     <a-asset-item

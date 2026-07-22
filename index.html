@@ -49,18 +49,13 @@ body {
   device-orientation-permission-ui="enabled: false">
   <a-assets>
 
-    <a-assets>
-  <video
-    id="logoVideo"
-    src="./LOGOMOTION.mp4"
-    preload="auto"
-    loop
-    muted
-    playsinline
-    crossorigin="anonymous">
-  </video>
-</a-assets>
-    
+    <a-asset-item
+      id="guardModel"
+      src="./guard3d.glb">
+    </a-asset-item>
+
+  </a-assets>
+
   <a-camera
     position="0 0 0"
     look-controls="enabled: false">
@@ -83,23 +78,5 @@ body {
 
 </a-scene>
 
-  <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const target = document.querySelector('[mindar-image-target]');
-  const video = document.querySelector('#logoVideo');
-
-  target.addEventListener("targetFound", () => {
-    video.currentTime = 0;
-    video.play();
-  });
-
-  target.addEventListener("targetLost", () => {
-    video.pause();
-  });
-
-});
-</script>
-  
 </body>
 </html>

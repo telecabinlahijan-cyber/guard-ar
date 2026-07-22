@@ -1,32 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="fa">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>GARD AR 3D</title>
+<title>GUARD AR</title>
 
 <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
 <style>
-body {
-  margin: 0;
-  overflow: hidden;
+
+body{
+  margin:0;
+  overflow:hidden;
 }
 
-.info {
-  position: fixed;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-family: Arial, sans-serif;
-  background: rgba(0,0,0,.5);
-  padding: 10px;
-  z-index: 999;
+.info{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
+  background:rgba(0,0,0,.6);
+  padding:10px 20px;
+  border-radius:10px;
+  font-family:Arial,sans-serif;
+  z-index:999;
 }
+
 </style>
+
 </head>
 
 <body>
@@ -36,53 +41,99 @@ body {
 </div>
 
 <a-scene
-  mindar-image="
-    imageTargetSrc: ./guard.mind;
-    filterMinCF: 0.0005;
-    filterBeta: 0.001;
-    warmupTolerance: 8;
-    missTolerance: 12;
-  "
-  color-space="sRGB"
-  renderer="colorManagement: true, physicallyCorrectLights"
-  vr-mode-ui="enabled: false"
-  device-orientation-permission-ui="enabled: false">
-  <a-assets>
 
-    <a-asset-item
-      id="guardModel"
-      src="./guard3d.glb">
-    </a-asset-item>
+mindar-image="
+imageTargetSrc: ./guard.mind;
+filterMinCF: 0.0005;
+filterBeta: 0.001;
+warmupTolerance: 8;
+missTolerance: 12;
+"
 
-  </a-assets>
+color-space="sRGB"
+renderer="colorManagement:true, physicallyCorrectLights:true"
+vr-mode-ui="enabled:false"
+device-orientation-permission-ui="enabled:false"
 
-  <a-camera
-    position="0 0 0"
-    look-controls="enabled: false">
-  </a-camera>
+>
 
-  <a-entity mindar-image-target="targetIndex:0">
+<a-assets>
 
-  <a-gltf-model
-    src="#guardModel"
-    position="0 0.4 0"
-    scale="0.05 0.05 0.05"
-     animation="property: rotation;
-             to: 0 360 0;
-             loop: true;
-             dur: 8000">
-  </a-gltf-model>
+<a-asset-item
+id="guardModel"
+src="./guard3d.glb">
+</a-asset-item>
 
-  <a-video
-    src="#logoVideo"
-    position="0 -0.4 0"
-    width="1.4"
-    height="0.8">
-  </a-video>
+<video
+id="logoVideo"
+src="./LOGOMOTION.mp4"
+preload="auto"
+loop
+muted
+playsinline
+webkit-playsinline
+crossorigin="anonymous">
+</video>
+
+</a-assets>
+
+<a-camera
+position="0 0 0"
+look-controls="enabled:false">
+</a-camera>
+
+<a-entity mindar-image-target="targetIndex:0">
+
+<!-- لوگوی سه بعدی -->
+
+<a-gltf-model
+src="#guardModel"
+position="0 0.55 0"
+rotation="0 0 0"
+scale="0.05 0.05 0.05">
+</a-gltf-model>
+
+<!-- ویدیو -->
+
+<a-video
+src="#logoVideo"
+position="0 -0.75 0"
+width="1.8"
+height="1.0">
+</a-video>
 
 </a-entity>
 
 </a-scene>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const target = document.querySelector('[mindar-image-target]');
+const video = document.querySelector('#logoVideo');
+
+target.addEventListener("targetFound", () => {
+
+video.currentTime = 0;
+
+const playPromise = video.play();
+
+if (playPromise !== undefined) {
+playPromise.catch(() => {});
+}
+
+});
+
+target.addEventListener("targetLost", () => {
+
+video.pause();
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
